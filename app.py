@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
-import numpy as np
-from streamlit_modal import Modal
+
 
 df1 = pd.read_csv('df_carlos_1_vf.csv')
 df2 = pd.read_csv('df_carlos_2_vf.csv')
