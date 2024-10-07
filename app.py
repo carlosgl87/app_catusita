@@ -121,8 +121,8 @@ elif seccion == "Dashboard":
     else:
         temp2 = df1[df1['sku']==filtro_2]
 
-    ing_sin = temp2['venta_sin_recomendacion'].sum()
-    ing_con = temp2['venta_con_recomendacion'].sum()
+    ing_sin = temp2['ingreso_sin_recomendacion'].sum()
+    ing_con = temp2['ingreso_con_recomendación'].sum()
     ing_inc = (ing_con - ing_sin) / ing_con
     # Primera tarjeta
     with col1:
@@ -139,15 +139,15 @@ elif seccion == "Dashboard":
 
     # Datos Grafico
     x = list(temp2['month'].unique())
-    y1 = temp2.groupby('month').agg({'venta_sin_recomendacion':'sum'})['venta_sin_recomendacion']
-    y2 = temp2.groupby('month').agg({'venta_con_recomendacion':'sum'})['venta_con_recomendacion']
+    y1 = temp2.groupby('month').agg({'ingreso_sin_recomendacion':'sum'})['ingreso_sin_recomendacion']
+    y2 = temp2.groupby('month').agg({'ingreso_con_recomendación':'sum'})['ingreso_con_recomendación']
 
     # Crear la figura
     fig = go.Figure()
 
     # Añadir las líneas
-    fig.add_trace(go.Scatter(x=x, y=y1, mode='lines', name='Ventas sin Recomendacion', line=dict(color='blue')))
-    fig.add_trace(go.Scatter(x=x, y=y2, mode='lines', name='Ventas con Recomendacion', line=dict(color='orange')))
+    fig.add_trace(go.Scatter(x=x, y=y1, mode='lines', name='Ingresos sin Recomendacion', line=dict(color='blue')))
+    fig.add_trace(go.Scatter(x=x, y=y2, mode='lines', name='Ingresos con Recomendacion', line=dict(color='orange')))
 
     # Personalizar el gráfico
     fig.update_layout(title='Ventas con vs sin recomendacion',
