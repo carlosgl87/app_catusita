@@ -36,7 +36,7 @@ if seccion == "Carga Archivos":
     
     with st.expander("Data SUNAT"):
         st.write('Ultima Actualizacion: 03/10/2024')
-        st.dataframe(df)
+        #st.dataframe(df)
         uploaded_file = st.file_uploader("Cargar archivo SUNAT", type=["txt", "csv", "xls", "xlsx"])
     
     with st.expander("Data SUNARP"):
@@ -177,7 +177,8 @@ elif seccion == "Dashboard":
     
     temp_skus_styled = temp_skus.style.format({
         'stock': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'caa': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'LT_meses': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'recomendacion_de_compra': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'demanda_mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'mean_margen': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'index_riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
@@ -205,7 +206,8 @@ elif seccion == "Recomendaciones":
     
     temp_recom_styled = temp_recom.style.format({
         'stock': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'caa': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'LT_meses': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'recomendacion_de_compra': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'demanda_mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'mean_margen': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'index_riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
