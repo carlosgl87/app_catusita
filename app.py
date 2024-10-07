@@ -82,7 +82,7 @@ elif seccion == "Dashboard":
         filtro_1 = st.selectbox(
             "Selecciona Fuente de Suministro:",
             lista1,
-            index=23
+            index=0
         )
 
         if filtro_1=='todos':
