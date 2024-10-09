@@ -6,6 +6,8 @@ import plotly.graph_objs as go
 df1 = pd.read_csv('df_carlos_1_vf.csv')
 df2 = pd.read_csv('df_carlos_2_vf.csv')
 
+tc_last = df1.loc[df1['date'] == df1['date'].max(), 'tc'].mean() 
+
 # Título de la aplicación
 # st.title("Catusita - Recomendación de Compras ")
 
@@ -146,7 +148,7 @@ elif seccion == "Dashboard":
     fig.add_trace(go.Scatter(x=x, y=y2, mode='lines', name='Ventas con Recomendacion', line=dict(color='orange')))
 
     # Personalizar el gráfico
-    fig.update_layout(title='Ventas con vs sin recomendacion',
+    fig.update_layout(title=f'Ventas con vs sin recomendacion (TC={tc_last} - Fecha {df1['date'].max()})',
                     xaxis_title='Fecha',
                     yaxis_title='USD',
                     showlegend=True)
