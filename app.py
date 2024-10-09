@@ -158,6 +158,16 @@ elif seccion == "Dashboard":
     lista_skus = list(temp2['sku'].unique())
     temp_skus = df2[df2['articulo'].isin(lista_skus)].sort_values('index_riesgo').reset_index(drop=True)
 
+    temp_skus = temp_skus.rename(columns={
+    'articulo': 'Artículo',
+    'stock': 'Inventario',
+    'LT_meses': 'Lead Time'
+    'compras_recomendadas': 'Recomendación de Compras',
+    'demanda_mensual': 'Demanda Mensual',
+    'mean_margen': 'Margen Promedio (%)',
+    'index_riesgo': 'Índice de Riesgo',
+    'riesgo': 'Categoría de Riesgo'})
+    
 
     def highlight_rows(row):
         if row['riesgo'] == 'Rojo':
@@ -172,31 +182,31 @@ elif seccion == "Dashboard":
             return [''] * len(row)
     
     temp_skus_styled = temp_skus.style.format({
-        'stock': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'LT_meses': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'recomendacion_de_compra': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'demanda_mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'mean_margen': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
-        'index_riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
+        'Inventario': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Lead Time': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Recomendación de Compras': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Demanda Mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Margen Promedio (%)': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
+        'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
-    temp_skus_styled_cleaned = temp_skus_styled.rename(columns={
-        'articulo': 'Artículo',
-        'stock': 'Inventario',
-        'compras_recomendadas': 'Recomendación de Compras',
-        'demanda_mensual': 'Demanda Mensual',
-        'mean_margen': 'Margen Promedio (%)',
-        'index_riesgo': 'Índice de Riesgo',
-        'riesgo': 'Categoría de Riesgo'
-    })
-
-    st.dataframe(temp_skus_styled_cleaned, hide_index=True)
+    st.dataframe(temp_skus_styled, hide_index=True)
 
 
 elif seccion == "Recomendaciones":
 
     temp_recom = df2.sort_values('index_riesgo').reset_index(drop=True)
 
+    temp_recom = temp_recom.rename(columns={
+    'articulo': 'Artículo',
+    'stock': 'Inventario',
+    'LT_meses': 'Lead Time'
+    'compras_recomendadas': 'Recomendación de Compras',
+    'demanda_mensual': 'Demanda Mensual',
+    'mean_margen': 'Margen Promedio (%)',
+    'index_riesgo': 'Índice de Riesgo',
+    'riesgo': 'Categoría de Riesgo'})
+    
     def highlight_rows(row):
         if row['riesgo'] == 'Rojo':
             return ['background-color: #f69e9b'] * len(row)
@@ -210,12 +220,12 @@ elif seccion == "Recomendaciones":
             return [''] * len(row)
     
     temp_recom_styled = temp_recom.style.format({
-        'stock': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'LT_meses': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'recomendacion_de_compra': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'demanda_mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'mean_margen': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
-        'index_riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
+        'Inventario': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Lead Time': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Recomendación de Compras': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Demanda Mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Margen Promedio (%)': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
+        'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
     temp_recom_styled_cleaned = temp_recom_styled.rename(columns={
