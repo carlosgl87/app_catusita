@@ -191,12 +191,12 @@ elif seccion == "Dashboard":
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
-    gb = GridOptionsBuilder.from_dataframe(temp_skus_styled)
+    gb = GridOptionsBuilder.from_dataframe(temp_skus)
     gb.configure_default_column(wrapHeaderText=True, autoHeight=True)
     gridOptions = gb.build()
 
     # Display dataframe with AgGrid
-    AgGrid(temp_skus_styled, gridOptions=gridOptions, fit_columns_on_grid_load=True)
+    AgGrid(temp_skus, gridOptions=gridOptions, fit_columns_on_grid_load=True)
 
 
 elif seccion == "Recomendaciones":
@@ -248,10 +248,10 @@ elif seccion == "Recomendaciones":
     st.header("Recomendaciones de compra")
     st.write('Ultima Actualizacion: 03/10/2024')
 
-    gb = GridOptionsBuilder.from_dataframe(temp_recom_styled_cleaned)
+    gb = GridOptionsBuilder.from_dataframe(temp_recom)
     gb.configure_default_column(wrapHeaderText=True, autoHeight=True)
     gridOptions = gb.build()
 
     # Display dataframe with AgGrid
-    AgGrid(temp_recom_styled_cleaned, gridOptions=gridOptions, fit_columns_on_grid_load=True)
+    AgGrid(temp_recom, gridOptions=gridOptions, fit_columns_on_grid_load=True)
     
