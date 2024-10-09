@@ -190,7 +190,19 @@ elif seccion == "Dashboard":
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
-    st.dataframe(temp_skus_styled, hide_index=True)
+    width = 1200
+
+    st.markdown("""
+        <style>
+        .dataframe th div {
+            white-space: normal;
+            word-wrap: break-word;
+            line-height: 1.1; /* Adjust this value for more spacing if needed */
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+    st.dataframe(temp_skus_styled, hide_index=True, width=width)
 
 
 elif seccion == "Recomendaciones":
@@ -241,6 +253,18 @@ elif seccion == "Recomendaciones":
     # Opción alternativa con st.dataframe para hacer la tabla interactiva
     st.header("Recomendaciones de compra")
     st.write('Ultima Actualizacion: 03/10/2024')
-    st.dataframe(temp_recom_styled_cleaned, hide_index=True)
+    width = 1200
+
+    st.markdown("""
+        <style>
+        .dataframe th div {
+            white-space: normal;
+            word-wrap: break-word;
+            line-height: 1.1; /* Adjust this value for more spacing if needed */
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+    st.dataframe(temp_recom_styled_cleaned, hide_index=True, width=width)
 
     
