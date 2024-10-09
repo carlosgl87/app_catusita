@@ -6,7 +6,7 @@ import plotly.graph_objs as go
 df1 = pd.read_csv('df_carlos_1_vf.csv')
 df2 = pd.read_csv('df_carlos_2_vf.csv')
 
-tc_last = df1.loc[df1['date'] == df1['date'].max(), 'tc'].mean() 
+tc_last = df1.loc[df1['date'] == df1['date'].max(), 'tc'].mean().round(2)
 
 # Título de la aplicación
 # st.title("Catusita - Recomendación de Compras ")
