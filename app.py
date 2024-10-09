@@ -241,7 +241,6 @@ elif seccion == "Recomendaciones":
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
-
     # Opción alternativa con st.dataframe para hacer la tabla interactiva
     st.header("Recomendaciones de compra")
     st.write('Ultima Actualizacion: 03/10/2024')
