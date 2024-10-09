@@ -161,7 +161,7 @@ elif seccion == "Dashboard":
     temp_skus = temp_skus.rename(columns={
     'articulo': 'Artículo',
     'stock': 'Inventario',
-    'LT_meses': 'Lead Time'
+    'LT_meses': 'Lead Time',
     'compras_recomendadas': 'Recomendación de Compras',
     'demanda_mensual': 'Demanda Mensual',
     'mean_margen': 'Margen Promedio (%)',
@@ -200,7 +200,7 @@ elif seccion == "Recomendaciones":
     temp_recom = temp_recom.rename(columns={
     'articulo': 'Artículo',
     'stock': 'Inventario',
-    'LT_meses': 'Lead Time'
+    'LT_meses': 'Lead Time',
     'compras_recomendadas': 'Recomendación de Compras',
     'demanda_mensual': 'Demanda Mensual',
     'mean_margen': 'Margen Promedio (%)',
