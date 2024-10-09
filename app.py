@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 
 
 df1 = pd.read_csv('df_carlos_1_vf.csv')
-df2 = pd.read_csv('df_carlos_2_vf.csv')
+df2 = pd.read_csv('df_carlos_1_vf.csv')
 
 # Título de la aplicación
 # st.title("Catusita - Recomendación de Compras ")
