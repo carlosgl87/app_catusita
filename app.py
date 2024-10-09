@@ -68,10 +68,6 @@ if seccion == "Carga Archivos":
         uploaded_file = st.file_uploader("Cargar archivo Fletes", type=["txt", "csv", "xls", "xlsx"])
 
 
-
-
-
-
 elif seccion == "Dashboard":
     st.header("Dashboard")
 
@@ -121,8 +117,8 @@ elif seccion == "Dashboard":
     else:
         temp2 = df1[df1['sku']==filtro_2]
 
-    ing_sin = temp2['ingreso_sin_recomendacion_ajustado'].sum()
-    ing_con = temp2['ingreso_con_recomendación_ajustado'].sum()
+    ing_sin = temp2['ingreso_usd_sin_recomendacion'].sum()
+    ing_con = temp2['ingreso_usd_con_recomendacion'].sum()
     ing_inc = (ing_con - ing_sin) / ing_con
     # Primera tarjeta
     with col1:
@@ -139,8 +135,8 @@ elif seccion == "Dashboard":
 
     # Datos Grafico
     x = list(temp2['month'].unique())
-    y1 = temp2.groupby('month').agg({'ingreso_sin_recomendacion_ajustado':'sum'})['ingreso_sin_recomendacion_ajustado']
-    y2 = temp2.groupby('month').agg({'ingreso_con_recomendación_ajustado':'sum'})['ingreso_con_recomendación_ajustado']
+    y1 = temp2.groupby('month').agg({'ingreso_usd_sin_recomendacion':'sum'})['ingreso_usd_sin_recomendacion']
+    y2 = temp2.groupby('month').agg({'ingreso_usd_con_recomendacion':'sum'})['ingreso_usd_con_recomendacion']
 
     # Crear la figura
     fig = go.Figure()
