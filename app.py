@@ -147,8 +147,8 @@ elif seccion == "Dashboard":
 
     # Personalizar el gráfico
     fig.update_layout(title='Ventas con vs sin recomendacion',
-                    xaxis_title='X',
-                    yaxis_title='Y',
+                    xaxis_title='Fecha',
+                    yaxis_title='USD',
                     showlegend=True)
 
     # Mostrar el gráfico en Streamlit
