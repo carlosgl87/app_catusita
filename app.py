@@ -180,8 +180,17 @@ elif seccion == "Dashboard":
         'index_riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
+    temp_skus_styled_cleaned = temp_skus_styled.rename(columns={
+        'articulo': 'Artículo',
+        'stock': 'Inventario',
+        'compras_recomendadas': 'Recomendación de Compras',
+        'demanda_mensual': 'Demanda Mensual',
+        'mean_margen': 'Margen Promedio (%)',
+        'index_riesgo': 'Índice de Riesgo',
+        'riesgo': 'Categoría de Riesgo'
+    })
 
-    st.dataframe(temp_skus_styled)
+    st.dataframe(temp_skus_styled_cleaned, hide_index=True)
 
 
 elif seccion == "Recomendaciones":
@@ -209,9 +218,19 @@ elif seccion == "Recomendaciones":
         'index_riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
+    temp_recom_styled_cleaned = temp_recom_styled.rename(columns={
+        'articulo': 'Artículo',
+        'stock': 'Inventario',
+        'compras_recomendadas': 'Recomendación de Compras',
+        'demanda_mensual': 'Demanda Mensual',
+        'mean_margen': 'Margen Promedio (%)',
+        'index_riesgo': 'Índice de Riesgo',
+        'riesgo': 'Categoría de Riesgo'
+    })
+
     # Opción alternativa con st.dataframe para hacer la tabla interactiva
     st.header("Recomendaciones de compra")
     st.write('Ultima Actualizacion: 03/10/2024')
-    st.dataframe(temp_recom_styled)
+    st.dataframe(temp_recom_styled_cleaned, hide_index=True)
 
     
