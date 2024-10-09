@@ -170,13 +170,13 @@ elif seccion == "Dashboard":
     
 
     def highlight_rows(row):
-        if row['riesgo'] == 'Rojo':
+        if row['Categoría de Riesgo'] == 'Rojo':
             return ['background-color: #f69e9b'] * len(row)
-        if row['riesgo'] == 'Naranja':
+        if row['Categoría de Riesgo'] == 'Naranja':
             return ['background-color: #f8dc98'] * len(row)
-        elif row['riesgo'] == 'Amarillo':
+        elif row['Categoría de Riesgo'] == 'Amarillo':
             return ['background-color: #f6f69b'] * len(row)
-        elif row['riesgo'] == 'Verde':
+        elif row['Categoría de Riesgo'] == 'Verde':
             return ['background-color: #b7f898'] * len(row)
         else:
             return [''] * len(row)
@@ -208,13 +208,13 @@ elif seccion == "Recomendaciones":
     'riesgo': 'Categoría de Riesgo'})
     
     def highlight_rows(row):
-        if row['riesgo'] == 'Rojo':
+        if row['Categoría de Riesgo'] == 'Rojo':
             return ['background-color: #f69e9b'] * len(row)
-        if row['riesgo'] == 'Naranja':
+        if row['Categoría de Riesgo'] == 'Naranja':
             return ['background-color: #f8dc98'] * len(row)
-        elif row['riesgo'] == 'Amarillo':
+        elif row['Categoría de Riesgo'] == 'Amarillo':
             return ['background-color: #f6f69b'] * len(row)
-        elif row['riesgo'] == 'Verde':
+        elif row['Categoría de Riesgo'] == 'Verde':
             return ['background-color: #b7f898'] * len(row)
         else:
             return [''] * len(row)
