@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from st_aggrid import AgGrid, GridOptionsBuilder
 import plotly.graph_objs as go
 
 
@@ -190,17 +191,12 @@ elif seccion == "Dashboard":
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
-    st.markdown("""
-        <style>
-        .dataframe th div {
-            white-space: normal;
-            word-wrap: break-word;
-            line-height: 1.1; /* Adjust this value for more spacing if needed */
-        }
-        </style>
-        """, unsafe_allow_html=True)
+    gb = GridOptionsBuilder.from_dataframe(temp_skus_styled)
+    gb.configure_default_column(wrapHeaderText=True, autoHeight=True)
+    gridOptions = gb.build()
 
-    st.dataframe(temp_skus_styled, hide_index=True)
+    # Display dataframe with AgGrid
+    AgGrid(temp_skus_styled, gridOptions=gridOptions, fit_columns_on_grid_load=True)
 
 
 elif seccion == "Recomendaciones":
@@ -252,16 +248,10 @@ elif seccion == "Recomendaciones":
     st.header("Recomendaciones de compra")
     st.write('Ultima Actualizacion: 03/10/2024')
 
-    st.markdown("""
-        <style>
-        .dataframe th div {
-            white-space: normal;
-            word-wrap: break-word;
-            line-height: 1.1; /* Adjust this value for more spacing if needed */
-        }
-        </style>
-        """, unsafe_allow_html=True)
+    gb = GridOptionsBuilder.from_dataframe(temp_recom_styled_cleaned)
+    gb.configure_default_column(wrapHeaderText=True, autoHeight=True)
+    gridOptions = gb.build()
 
-    st.dataframe(temp_recom_styled_cleaned, hide_index=True)
-
+    # Display dataframe with AgGrid
+    AgGrid(temp_recom_styled_cleaned, gridOptions=gridOptions, fit_columns_on_grid_load=True)
     
