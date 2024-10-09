@@ -166,6 +166,7 @@ elif seccion == "Dashboard":
     'demanda_mensual': 'Demanda Mensual',
     'mean_margen': 'Margen Promedio (%)',
     'index_riesgo': 'Índice de Riesgo',
+    'Precio': 'Precio',
     'riesgo': 'Categoría de Riesgo'})
     
 
@@ -188,6 +189,7 @@ elif seccion == "Dashboard":
         'Demanda Mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Margen Promedio (%)': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
+        'Precio': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
     st.markdown("""
@@ -215,6 +217,7 @@ elif seccion == "Recomendaciones":
     'demanda_mensual': 'Demanda Mensual',
     'mean_margen': 'Margen Promedio (%)',
     'index_riesgo': 'Índice de Riesgo',
+    'Precio': 'Precio',
     'riesgo': 'Categoría de Riesgo'})
     
     def highlight_rows(row):
@@ -238,15 +241,6 @@ elif seccion == "Recomendaciones":
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
-    temp_recom_styled_cleaned = temp_recom_styled.rename(columns={
-        'articulo': 'Artículo',
-        'stock': 'Inventario',
-        'compras_recomendadas': 'Recomendación de Compras',
-        'demanda_mensual': 'Demanda Mensual',
-        'mean_margen': 'Margen Promedio (%)',
-        'index_riesgo': 'Índice de Riesgo',
-        'riesgo': 'Categoría de Riesgo'
-    })
 
     # Opción alternativa con st.dataframe para hacer la tabla interactiva
     st.header("Recomendaciones de compra")
@@ -261,6 +255,6 @@ elif seccion == "Recomendaciones":
         </style>
         """, unsafe_allow_html=True)
 
-    st.dataframe(temp_recom_styled_cleaned, hide_index=True)
+    st.dataframe(temp_recom_styled, hide_index=True)
 
     
