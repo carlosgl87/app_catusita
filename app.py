@@ -162,28 +162,27 @@ elif seccion == "Dashboard":
     temp_skus = df2[df2['articulo'].isin(lista_skus)].sort_values('index_riesgo').reset_index(drop=True)
 
     temp_skus = temp_skus.rename(columns={
-    'articulo': 'Artículo',
+    'articulo': 'SKU',
     'stock': 'Inventario',
-    'LT_meses': 'Lead Time',
-    'compras_recomendadas': 'Recomendación de Compras',
-    'demanda_mensual': 'Demanda Mensual',
+    'LT_meses': 'LT',
+    'compras_recomendadas': 'Rec. de Compra',
+    'demanda_mensual': 'Dem. Mensual',
     'mean_margen': 'Margen Promedio (%)',
-    'ultima_fecha': 'Fecha De Última Compra',
+    'ultima_fecha': 'Fecha Ult. Compra',
     'monto_usd': 'Precio de Última Compra (USD)',
-    'ultima_compra': 'Úlltima Cantidad Comprada',
+    'ultima_compra': 'Últ. Compra',
     'index_riesgo': 'Índice de Riesgo',
     'riesgo': 'Categoría de Riesgo'})
-    
     new_column_order = [
-        'Artículo',
+        'SKU',
         'Inventario',
-        'Lead Time',
-        'Recomendación de Compras',
-        'Demanda Mensual',
+        'Fecha Ult. Compra',
+        'Últ. Compra',
+        'LT',
+        'Rec. de Compra',
+        'Dem. Mensual',
         'Margen Promedio (%)',
-        'Fecha De Última Compra',
         'Precio de Última Compra (USD)',
-        'Úlltima Cantidad Comprada',
         'Índice de Riesgo',
         'Categoría de Riesgo'
     ]
@@ -205,12 +204,14 @@ elif seccion == "Dashboard":
     temp_skus_styled = temp_skus.style.format({
         'Inventario': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Lead Time': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'Recomendación de Compras': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
-        'Demanda Mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Últ. Compra': '{:.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Rec. de Compra': '{:.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Dem. Mensual': '{:.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'LT': '{:.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Margen Promedio (%)': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'Precio de Última Compra (USD)': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
-        'Úlltima Cantidad Comprada': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
+        'Úlltima Cantidad Comprada': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
     st.dataframe(temp_skus_styled, hide_index=True)
@@ -221,28 +222,28 @@ elif seccion == "Recomendaciones":
     temp_recom = df2.sort_values('index_riesgo').reset_index(drop=True)
 
     temp_recom = temp_recom.rename(columns={
-    'articulo': 'Artículo',
+    'articulo': 'SKU',
     'stock': 'Inventario',
-    'LT_meses': 'Lead Time',
-    'compras_recomendadas': 'Recomendación de Compras',
-    'demanda_mensual': 'Demanda Mensual',
+    'LT_meses': 'LT',
+    'compras_recomendadas': 'Rec. de Compra',
+    'demanda_mensual': 'Dem. Mensual',
     'mean_margen': 'Margen Promedio (%)',
-    'ultima_fecha': 'Fecha De Última Compra',
+    'ultima_fecha': 'Fecha Ult. Compra',
     'monto_usd': 'Precio de Última Compra (USD)',
-    'ultima_compra': 'Úlltima Cantidad Comprada',
+    'ultima_compra': 'Últ. Compra',
     'index_riesgo': 'Índice de Riesgo',
     'riesgo': 'Categoría de Riesgo'})
 
     new_column_order = [
-        'Artículo',
+        'SKU',
         'Inventario',
-        'Lead Time',
-        'Recomendación de Compras',
-        'Demanda Mensual',
+        'Fecha Ult. Compra',
+        'Últ. Compra',
+        'LT',
+        'Rec. de Compra',
+        'Dem. Mensual',
         'Margen Promedio (%)',
-        'Fecha De Última Compra',
         'Precio de Última Compra (USD)',
-        'Úlltima Cantidad Comprada',
         'Índice de Riesgo',
         'Categoría de Riesgo'
     ]
