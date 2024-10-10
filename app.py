@@ -168,10 +168,27 @@ elif seccion == "Dashboard":
     'compras_recomendadas': 'Recomendación de Compras',
     'demanda_mensual': 'Demanda Mensual',
     'mean_margen': 'Margen Promedio (%)',
+    'ultima_fecha': 'Fecha De Última Compra',
+    'monto_usd': 'Precio de Última Compra (USD)',
+    'ultima_compra': 'Úlltima Cantidad Comprada',
     'index_riesgo': 'Índice de Riesgo',
-    'Precio': 'Precio',
     'riesgo': 'Categoría de Riesgo'})
     
+    new_column_order = [
+        'Artículo',
+        'Inventario',
+        'Lead Time',
+        'Recomendación de Compras',
+        'Demanda Mensual',
+        'Margen Promedio (%)',
+        'Fecha De Última Compra',
+        'Precio de Última Compra (USD)',
+        'Úlltima Cantidad Comprada',
+        'Índice de Riesgo',
+        'Categoría de Riesgo'
+    ]
+
+    temp_skus = temp_skus[new_column_order]
 
     def highlight_rows(row):
         if row['Categoría de Riesgo'] == 'Rojo':
@@ -192,18 +209,9 @@ elif seccion == "Dashboard":
         'Demanda Mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Margen Promedio (%)': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
-        'Precio': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Precio de Última Compra (USD)': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
+        'Úlltima Cantidad Comprada': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
-
-    st.markdown("""
-        <style>
-        .dataframe th div {
-            white-space: normal;
-            word-wrap: break-word;
-            line-height: 1.1; /* Adjust this value for more spacing if needed */
-        }
-        </style>
-        """, unsafe_allow_html=True)
 
     st.dataframe(temp_skus_styled, hide_index=True)
 
@@ -219,9 +227,27 @@ elif seccion == "Recomendaciones":
     'compras_recomendadas': 'Recomendación de Compras',
     'demanda_mensual': 'Demanda Mensual',
     'mean_margen': 'Margen Promedio (%)',
+    'ultima_fecha': 'Fecha De Última Compra',
+    'monto_usd': 'Precio de Última Compra (USD)',
+    'ultima_compra': 'Úlltima Cantidad Comprada',
     'index_riesgo': 'Índice de Riesgo',
-    'Precio': 'Precio',
     'riesgo': 'Categoría de Riesgo'})
+
+    new_column_order = [
+        'Artículo',
+        'Inventario',
+        'Lead Time',
+        'Recomendación de Compras',
+        'Demanda Mensual',
+        'Margen Promedio (%)',
+        'Fecha De Última Compra',
+        'Precio de Última Compra (USD)',
+        'Úlltima Cantidad Comprada',
+        'Índice de Riesgo',
+        'Categoría de Riesgo'
+    ]
+
+    temp_recom = temp_recom[new_column_order]
     
     def highlight_rows(row):
         if row['Categoría de Riesgo'] == 'Rojo':
@@ -242,20 +268,13 @@ elif seccion == "Recomendaciones":
         'Demanda Mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Margen Promedio (%)': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
+        'Precio de Última Compra (USD)': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
+        'Úlltima Cantidad Comprada': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
     # Opción alternativa con st.dataframe para hacer la tabla interactiva
     st.header("Recomendaciones de compra")
     st.write('Ultima Actualizacion: 03/10/2024')
-    st.markdown("""
-        <style>
-        .dataframe th div {
-            white-space: normal;
-            word-wrap: break-word;
-            line-height: 1.1; /* Adjust this value for more spacing if needed */
-        }
-        </style>
-        """, unsafe_allow_html=True)
 
     st.dataframe(temp_recom_styled, hide_index=True)
 
