@@ -137,7 +137,7 @@ elif seccion == "Dashboard":
 
 
     # Datos Grafico
-    x = list(temp2['date'].unique())
+    x = list(temp2['date'].unique())[:-1]
     y1 = temp2.groupby('date').agg({'ingreso_usd_sin_recomendacion':'sum'})['ingreso_usd_sin_recomendacion']
     y2 = temp2.groupby('date').agg({'ingreso_usd_con_recomendacion':'sum'})['ingreso_usd_con_recomendacion']
 
