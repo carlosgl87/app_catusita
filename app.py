@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.graph_objs as go
 
 
-df1 = pd.read_csv('df_carlos_1_vf.csv')
-df2 = pd.read_csv('df_carlos_2_vf.csv')
+df1 = pd.read_csv('df_carlos_1_vf1.csv')
+df2 = pd.read_csv('df_carlos_2_vf1.csv')
 
 tc_last = df1.loc[df1['date'] == df1['date'].max(), 'tc'].mean().round(2)
 fecha_max=df1['date'].max()
@@ -79,9 +79,9 @@ elif seccion == "Dashboard":
         lista1 = list(df1['fuente_suministro'].unique())
         lista1.insert(0,'todos')
         filtro_1 = st.selectbox(
-            "Selecciona Fuente de Suministro:",
-            lista1,
-            index=23
+        "Selecciona Fuente de Suministro:",
+        lista1,
+        index=0  # Change this to 0
         )
 
         if filtro_1=='todos':
