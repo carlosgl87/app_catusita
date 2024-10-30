@@ -149,10 +149,12 @@ elif seccion == "Dashboard":
     fig.add_trace(go.Scatter(x=x, y=y2, mode='lines', name='Ventas con Recomendacion', line=dict(color='orange')))
 
     # Personalizar el gráfico
-    fig.update_layout(title=f'Ventas con vs sin recomendacion (TC={tc_last} - Fecha: {fecha_max}) /n *Nota: Para fines de comparación se considera inventario cero',
-                    xaxis_title='Fecha',
-                    yaxis_title='USD',
-                    showlegend=True)
+    fig.update_layout(
+        title=f'Ventas con vs sin recomendacion (TC={tc_last} - Fecha: {fecha_max})<br>Nota: Para fines de comparación se considera inventario cero',
+        xaxis_title='Fecha',
+        yaxis_title='USD',
+        showlegend=True
+    )
 
     # Mostrar el gráfico en Streamlit
     st.plotly_chart(fig)
