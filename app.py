@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.graph_objs as go
 
 
-df1 = pd.read_csv('df_carlos_1_vf1.csv')
-df2 = pd.read_csv('df_carlos_2_vf1.csv')
+df1 = pd.read_csv('df_carlos_1_vf.csv')
+df2 = pd.read_csv('df_carlos_2_vf.csv')
 
 tc_last = df1.loc[df1['date'] == df1['date'].max(), 'tc'].mean().round(2)
 fecha_max=df1['date'].max()
@@ -149,7 +149,7 @@ elif seccion == "Dashboard":
     fig.add_trace(go.Scatter(x=x, y=y2, mode='lines', name='Ventas con Recomendacion', line=dict(color='orange')))
 
     # Personalizar el gráfico
-    fig.update_layout(title=f'Ventas con vs sin recomendacion (TC={tc_last} - Fecha: {fecha_max})',
+    fig.update_layout(title=f'Ventas con vs sin recomendacion (TC={tc_last} - Fecha: {fecha_max}) /n *Nota: Para fines de comparación se considera inventario cero',
                     xaxis_title='Fecha',
                     yaxis_title='USD',
                     showlegend=True)
@@ -162,25 +162,33 @@ elif seccion == "Dashboard":
     temp_skus = df2[df2['articulo'].isin(lista_skus)].sort_values('index_riesgo').reset_index(drop=True)
 
     temp_skus = temp_skus.rename(columns={
+    'hierarchy': 'Prioridad',
+    'fuente_suministro': 'Fuente de Sum.',
     'articulo': 'SKU',
     'stock': 'Inventario',
     'LT_meses': 'LT',
     'compras_recomendadas': 'Rec. de Compra',
     'demanda_mensual': 'Dem. Mensual',
+    'meses_proteccion': 'Prot. Compra',
     'mean_margen': 'Margen Promedio (%)',
     'ultima_fecha': 'Fecha Ult. Compra',
     'monto_usd': 'Precio de Última Compra (USD)',
     'ultima_compra': 'Últ. Compra',
+    'costo_compra': 'Costo de Rec.',
     'index_riesgo': 'Índice de Riesgo',
     'riesgo': 'Categoría de Riesgo'})
     new_column_order = [
+        'Prioridad',
+        'Fuente de Sum.',
         'SKU',
         'Inventario',
         'Fecha Ult. Compra',
         'Últ. Compra',
         'LT',
         'Rec. de Compra',
+        'Costo de Rec.',
         'Dem. Mensual',
+        'Prot. Compra',
         'Margen Promedio (%)',
         'Precio de Última Compra (USD)',
         'Índice de Riesgo',
@@ -188,6 +196,7 @@ elif seccion == "Dashboard":
     ]
 
     temp_skus = temp_skus[new_column_order]
+    temp_skus=temp_skus.sort_values(by=['Prioridad','Índice de Riesgo'])
 
     def highlight_rows(row):
         if row['Categoría de Riesgo'] == 'Rojo':
@@ -207,11 +216,13 @@ elif seccion == "Dashboard":
         'Últ. Compra': '{:.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Rec. de Compra': '{:.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Dem. Mensual': '{:.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Prot. Compra': '{:,.2f}',
+        'Costo de Rec.': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'LT': '{:.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Margen Promedio (%)': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'Precio de Última Compra (USD)': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
-        'Úlltima Cantidad Comprada': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
+        'Última Cantidad Comprada': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
     st.dataframe(temp_skus_styled, hide_index=True)
@@ -222,26 +233,34 @@ elif seccion == "Recomendaciones":
     temp_recom = df2.sort_values('index_riesgo').reset_index(drop=True)
 
     temp_recom = temp_recom.rename(columns={
+    'hierarchy': 'Prioridad',
+    'fuente_suministro': 'Fuente de Sum.',
     'articulo': 'SKU',
     'stock': 'Inventario',
     'LT_meses': 'LT',
     'compras_recomendadas': 'Rec. de Compra',
     'demanda_mensual': 'Dem. Mensual',
+    'meses_proteccion': 'Prot. Compra',
     'mean_margen': 'Margen Promedio (%)',
     'ultima_fecha': 'Fecha Ult. Compra',
     'monto_usd': 'Precio de Última Compra (USD)',
     'ultima_compra': 'Últ. Compra',
+    'costo_compra': 'Costo de Rec.',
     'index_riesgo': 'Índice de Riesgo',
     'riesgo': 'Categoría de Riesgo'})
 
     new_column_order = [
+        'Prioridad',
+        'Fuente de Sum.',
         'SKU',
         'Inventario',
         'Fecha Ult. Compra',
         'Últ. Compra',
         'LT',
         'Rec. de Compra',
+        'Costo de Rec.',
         'Dem. Mensual',
+        'Prot. Compra',
         'Margen Promedio (%)',
         'Precio de Última Compra (USD)',
         'Índice de Riesgo',
@@ -249,6 +268,7 @@ elif seccion == "Recomendaciones":
     ]
 
     temp_recom = temp_recom[new_column_order]
+    temp_recom=temp_recom.sort_values(by=['Prioridad','Índice de Riesgo'])
     
     def highlight_rows(row):
         if row['Categoría de Riesgo'] == 'Rojo':
@@ -267,10 +287,12 @@ elif seccion == "Recomendaciones":
         'Lead Time': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Recomendación de Compras': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Demanda Mensual': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
+        'Prot. Compra': '{:,.2f}',
+        'Costo de Rec.': '{:,.0f}',  # Formato para Precio: separar miles y 2 decimales
         'Margen Promedio (%)': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'Índice de Riesgo': '{:,.2f}',  # Formato para Descuento: porcentaje sin decimales
         'Precio de Última Compra (USD)': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
-        'Úlltima Cantidad Comprada': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
+        'Última Cantidad Comprada': '{:,.0f}',  # Formato para Descuento: porcentaje sin decimales
     }).apply(highlight_rows, axis=1)  # Aplicar colores a las filas basado en 'Riesgo'
 
     # Opción alternativa con st.dataframe para hacer la tabla interactiva
