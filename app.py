@@ -6,7 +6,10 @@ import plotly.graph_objs as go
 df1 = pd.read_csv('df_carlos_1_vf.csv')
 df2 = pd.read_csv('df_carlos_2_vf.csv')
 
-tc_last = df1.loc[df1['date'] == df1['date'].max(), 'tc'].mean().round(2)
+try:
+    tc_last = df1.loc[df1['date'] == df1['date'].max(), 'tc'].mean().round(2)
+except AttributeError:
+    tc_last = round(df1.loc[df1['date'] == df1['date'].max(), 'tc'].mean(), 2)
 fecha_max=df1['date'].max()
 
 # Título de la aplicación
@@ -169,7 +172,7 @@ elif seccion == "Dashboard":
     'articulo': 'SKU',
     'stock': 'Inventario',
     'LT_meses': 'LT',
-    'compras_recomendadas': 'Rec. de Compra',
+    'compra_sugerida': 'Rec. de Compra',
     'demanda_mensual': 'Dem. Mensual',
     'meses_proteccion': 'Prot. Compra',
     'mean_margen': 'Margen Promedio (%)',
@@ -240,7 +243,7 @@ elif seccion == "Recomendaciones":
     'articulo': 'SKU',
     'stock': 'Inventario',
     'LT_meses': 'LT',
-    'compras_recomendadas': 'Rec. de Compra',
+    'compra_sugerida': 'Rec. de Compra',
     'demanda_mensual': 'Dem. Mensual',
     'meses_proteccion': 'Prot. Compra',
     'mean_margen': 'Margen Promedio (%)',
